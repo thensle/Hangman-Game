@@ -20,6 +20,7 @@ if(gameStatus === 0) {
 	selectedWord = wordBank[randomNum];
 	selectedWordArray = selectedWord.split("");
 	displayWord(selectedWord);
+	console.log(selectedWord);
 	guessCounter = 10;
 	guessedLetters = [];
 }
@@ -32,10 +33,8 @@ document.onkeyup = function(event) {
         var letterTyped = String.fromCharCode(event.keyCode).toLowerCase();
 
           if ((letterTyped === "a") || (letterTyped === "b") || (letterTyped === "c") || (letterTyped === "d") || (letterTyped === "e") || (letterTyped === "f") || (letterTyped === "g") || (letterTyped === "h") || (letterTyped === "i") || (letterTyped === "j") || (letterTyped === "k") || (letterTyped === "l") || (letterTyped === "m") || (letterTyped === "n") || (letterTyped === "o") || (letterTyped === "p") || (letterTyped === "q") || (letterTyped === "r") || (letterTyped === "s") || (letterTyped === "t") || (letterTyped === "u") || (letterTyped === "v") || (letterTyped === "w") || (letterTyped === "x") || (letterTyped === "y") || (letterTyped === "z")){
-  				guessedLetters.push(letterTyped);
-
-
-      		
+  				checkLetter(letterTyped);
+  				console.log(letterTyped);
           }
 
           if ((letterTyped != "a") && (letterTyped != "b") && (letterTyped != "c") && (letterTyped != "d") && (letterTyped != "e") && (letterTyped != "f") && (letterTyped != "g") && (letterTyped != "h") && (letterTyped != "i") && (letterTyped != "j") && (letterTyped != "k") && (letterTyped != "l") && (letterTyped != "m") && (letterTyped != "n") && (letterTyped != "o") && (letterTyped != "p") && (letterTyped != "q") && (letterTyped != "r") && (letterTyped != "s") && (letterTyped != "t") && (letterTyped != "u") && (letterTyped != "v") && (letterTyped != "w") && (letterTyped != "x") && (letterTyped != "y") && (letterTyped != "z")) {
@@ -49,11 +48,11 @@ function displayWord(word) {
 	var stringWord = [];
 
 		for (var i = 0; i < word.length; i++) {
-			stringword = stringWord.push("_ ");
+			stringWord.push("_");
  
 		}
 
-	childDiv.innerHTML = stringWord;
+	childDiv.innerHTML = stringWord.join(" ");
 	parent.appendChild(childDiv);
 
 }
@@ -64,35 +63,27 @@ function checkLetter(letter) {
 		for (var i = 0; i < selectedWord.length; i++) {
 			 if (selectedWord.charAt(i) === letter) {
 			 	letterInWord = true;
-
 			 }
+			}
 			 if (letterInWord = true) {
 			 	for (var i = 0; i < selectedWord.length; i++) {
 			 		if (selectedWord.charAt(i) === letter) {
 			 			stringWord[i] = letter;
 
+			 } else{
+			 	stringWord[i] = stringWord[i];
 			 }
+			 console.log("display on screen after guess: " + stringWord);
 			}
-
-
+			} else {
+				guessCounter--;
+				guessedLetters.push(letter);
 			}
- 
-		
+			console.log("Our guess letters: " + guessedLetters.toString());
+		}
 
-	childDiv.innerHTML = stringWord;
-	parent.appendChild(childDiv);
-}
-
-function updateScores(){
-
-}
-
-// function addLetterToBank(letter){
+function updateScores() {
 
 
-// }
-
-function revealLetter(index, word, letter){
-	
 }
 }
