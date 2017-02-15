@@ -27,12 +27,12 @@ document.onkeyup = function(event) {
         var letterTyped = String.fromCharCode(event.keyCode).toLowerCase();
 
           if ((letterTyped === "a") || (letterTyped === "b") || (letterTyped === "c") || (letterTyped === "d") || (letterTyped === "e") || (letterTyped === "f") || (letterTyped === "g") || (letterTyped === "h") || (letterTyped === "i") || (letterTyped === "j") || (letterTyped === "k") || (letterTyped === "l") || (letterTyped === "m") || (letterTyped === "n") || (letterTyped === "o") || (letterTyped === "p") || (letterTyped === "q") || (letterTyped === "r") || (letterTyped === "s") || (letterTyped === "t") || (letterTyped === "u") || (letterTyped === "v") || (letterTyped === "w") || (letterTyped === "x") || (letterTyped === "y") || (letterTyped === "z")){
-          		for (var i = 0; i < selectedWord.length; i++) {
-					if (selectedWord.charAt(i) === letterTyped) {
-						stringWord[i] === letter;
+     //      		for (var i = 0; i < selectedWord.length; i++) {
+					// if (selectedWord.charAt(i) === letterTyped) {
+					// 	stringWord.splice(i, 1, letterTyped);
 
-		}
-	}
+	// 	}
+	// }
       		
           }
 
@@ -44,16 +44,15 @@ document.onkeyup = function(event) {
 function displayWord(word) {
 	var parent = document.getElementById("word");
 	var childDiv = document.createElement("div");
-	var stringWord = [];
+	var stringWord = "";
 
 		for (var i = 0; i < word.length; i++) {
-			stringWord.push("_ ");
+			stringWord = (stringWord + "_ ");
 
 		}
 
 	childDiv.innerHTML = stringWord;
 	parent.appendChild(childDiv);
-	return stringWord;
 
 }
 
