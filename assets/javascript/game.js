@@ -34,7 +34,10 @@ document.onkeyup = function(event) {
 
           if ((letterTyped === "a") || (letterTyped === "b") || (letterTyped === "c") || (letterTyped === "d") || (letterTyped === "e") || (letterTyped === "f") || (letterTyped === "g") || (letterTyped === "h") || (letterTyped === "i") || (letterTyped === "j") || (letterTyped === "k") || (letterTyped === "l") || (letterTyped === "m") || (letterTyped === "n") || (letterTyped === "o") || (letterTyped === "p") || (letterTyped === "q") || (letterTyped === "r") || (letterTyped === "s") || (letterTyped === "t") || (letterTyped === "u") || (letterTyped === "v") || (letterTyped === "w") || (letterTyped === "x") || (letterTyped === "y") || (letterTyped === "z")){
   				checkLetter(letterTyped);
+  				guessedLetters.push(letterTyped);
   				console.log(letterTyped);
+  				console.log(guessedLetters);
+  				updateScores();
           }
 
           if ((letterTyped != "a") && (letterTyped != "b") && (letterTyped != "c") && (letterTyped != "d") && (letterTyped != "e") && (letterTyped != "f") && (letterTyped != "g") && (letterTyped != "h") && (letterTyped != "i") && (letterTyped != "j") && (letterTyped != "k") && (letterTyped != "l") && (letterTyped != "m") && (letterTyped != "n") && (letterTyped != "o") && (letterTyped != "p") && (letterTyped != "q") && (letterTyped != "r") && (letterTyped != "s") && (letterTyped != "t") && (letterTyped != "u") && (letterTyped != "v") && (letterTyped != "w") && (letterTyped != "x") && (letterTyped != "y") && (letterTyped != "z")) {
@@ -65,25 +68,38 @@ function checkLetter(letter) {
 			 	letterInWord = true;
 			 }
 			}
-			 if (letterInWord = true) {
+			 if (letterInWord === true) {
 			 	for (var i = 0; i < selectedWord.length; i++) {
 			 		if (selectedWord.charAt(i) === letter) {
 			 			stringWord[i] = letter;
 
-			 } else{
+			 } if (selectedWord.charAt(i) != letter){
 			 	stringWord[i] = stringWord[i];
 			 }
 			 console.log("display on screen after guess: " + stringWord);
 			}
-			} else {
+			} if (letterInWord === false) {
 				guessCounter--;
-				guessedLetters.push(letter);
 			}
-			console.log("Our guess letters: " + guessedLetters.toString());
+			
 		}
 
 function updateScores() {
+	//For word/underscore spaces
+
+	// var childDiv1 = document.createElement("div");
+	// childDiv1.innerHTML = stringWord;
+
+	//For guesses remaining
+
+	guesses.innerHTML = guessCounter;
+
+	//For letters
+
+	bank.innerHTML = guessedLetters;
+
+	// //Did the user win? Update winner counter
 
 
-}
+	}
 }
