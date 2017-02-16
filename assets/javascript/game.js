@@ -9,13 +9,17 @@ var randomNum;
 var selectedWord;
 var selectedWordArray;
 var winCounter = 0;
-var guessCounter = 10;
+var guessCounter;
 var stringWord = [];
 var guessedLetters = [];
 
 
+
+
 //Starting the game/turn; program randomly picks a word
-if(gameStatus === 0) {
+gameStart();
+
+function gameStart(){
 	randomNum = Math.floor(Math.random() * wordBank.length);
 	selectedWord = wordBank[randomNum];
 	selectedWordArray = selectedWord.split("");
@@ -23,8 +27,10 @@ if(gameStatus === 0) {
 	console.log(selectedWord);
 	guessCounter = 10;
 	guessedLetters = [];
-}
+	guesses.innerHTML = guessCounter;
+	wins.innerHTML = winCounter;
 
+}
 //Capturing user input
 
 document.onkeyup = function(event) {
@@ -33,11 +39,19 @@ document.onkeyup = function(event) {
         var letterTyped = String.fromCharCode(event.keyCode).toLowerCase();
 
           if ((letterTyped === "a") || (letterTyped === "b") || (letterTyped === "c") || (letterTyped === "d") || (letterTyped === "e") || (letterTyped === "f") || (letterTyped === "g") || (letterTyped === "h") || (letterTyped === "i") || (letterTyped === "j") || (letterTyped === "k") || (letterTyped === "l") || (letterTyped === "m") || (letterTyped === "n") || (letterTyped === "o") || (letterTyped === "p") || (letterTyped === "q") || (letterTyped === "r") || (letterTyped === "s") || (letterTyped === "t") || (letterTyped === "u") || (letterTyped === "v") || (letterTyped === "w") || (letterTyped === "x") || (letterTyped === "y") || (letterTyped === "z")){
+  			
+          	//First, check if letter has been typed before, if so, return out of loop
+  			for (var i = 0; i < guessedLetters.length; i++){
+  				if (guessedLetters[i] === letterTyped){
+  					return;
+  				}
+  			}
   				checkLetter(letterTyped);
   				guessedLetters.push(letterTyped);
+  				updateScores();
   				console.log(letterTyped);
   				console.log(guessedLetters);
-  				updateScores();
+  				
           }
 
           if ((letterTyped != "a") && (letterTyped != "b") && (letterTyped != "c") && (letterTyped != "d") && (letterTyped != "e") && (letterTyped != "f") && (letterTyped != "g") && (letterTyped != "h") && (letterTyped != "i") && (letterTyped != "j") && (letterTyped != "k") && (letterTyped != "l") && (letterTyped != "m") && (letterTyped != "n") && (letterTyped != "o") && (letterTyped != "p") && (letterTyped != "q") && (letterTyped != "r") && (letterTyped != "s") && (letterTyped != "t") && (letterTyped != "u") && (letterTyped != "v") && (letterTyped != "w") && (letterTyped != "x") && (letterTyped != "y") && (letterTyped != "z")) {
@@ -57,6 +71,7 @@ function displayWord(word) {
 
 	childDiv.innerHTML = stringWord.join(" ");
 	parent.appendChild(childDiv);
+	console.log(stringWord);
 
 }
 
@@ -87,18 +102,29 @@ function checkLetter(letter) {
 function updateScores() {
 	//For word/underscore spaces
 
-	// var childDiv1 = document.createElement("div");
-	// childDiv1.innerHTML = stringWord;
+	word.innerHTML=stringWord.join(" ");
 
 	//For guesses remaining
-
 	guesses.innerHTML = guessCounter;
+
+	if (guessCounter === 0){
+		alert("Sorry - no more guesses left!");
+		gameStart();
+	}
 
 	//For letters
 
-	bank.innerHTML = guessedLetters;
+	bank.innerHTML = guessedLetters.join(" ");
 
-	// //Did the user win? Update winner counter
+	// Did the user win? Update winner counter
+
+	if (selectedWordArray === stringWord){
+		console.log(selectedWordArray);
+		console.log(stringWord);
+		winCounter++;
+		wins.innerHTML = winCounter;
+
+	}
 
 
 	}
